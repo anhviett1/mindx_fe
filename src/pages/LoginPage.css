@@ -1,0 +1,245 @@
+/* Full-page center layout similar to modern auth pages */
+.loginPage {
+  min-height: calc(100vh - 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+}
+
+.loginShell {
+  width: 100%;
+  max-width: 980px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 40px;
+  align-items: center;
+}
+
+.loginHero {
+  padding-right: 32px;
+}
+
+.loginTitle {
+  margin: 8px 0 10px 0;
+  font-size: 42px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.loginSubtitle {
+  margin: 0;
+  max-width: 40rem;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 15px;
+}
+
+.loginBullets {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.loginBullet {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 13px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.95), rgba(34, 211, 238, 0.85));
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.12);
+}
+
+.loginCard {
+  max-width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.loginCardTitle {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.loginCardSubtitle {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.loginButton {
+  width: 100%;
+  padding: 12px 14px;
+}
+
+.loginDivider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0 12px 0;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.loginDivider::before,
+.loginDivider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(148, 163, 184, 0.45);
+}
+
+.tokenPaste {
+  display: grid;
+  gap: 10px;
+}
+
+.tokenPasteLabel {
+  font-size: 13px;
+}
+
+.tokenPasteRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.tokenPasteInput {
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(15, 23, 42, 0.55);
+  color: rgba(255, 255, 255, 0.92);
+  outline: none;
+}
+
+.tokenPasteInput::placeholder {
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.tokenPasteInput:focus {
+  border-color: rgba(139, 92, 246, 0.75);
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.12);
+}
+
+.tokenPasteEye {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(15, 23, 42, 0.55);
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  line-height: 1;
+  user-select: none;
+}
+
+.tokenPasteEye:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tokenPasteButton {
+  width: 100%;
+  padding: 12px 14px;
+}
+
+.loginHint {
+  margin-top: 12px;
+  font-size: 13px;
+}
+
+.loginFoot {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.10);
+  opacity: 0.85;
+  word-break: break-word;
+}
+
+.loginForm .formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.loginForm label {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(148, 163, 184, 0.9);
+}
+
+.loginForm input {
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: rgba(15, 23, 42, 0.9);
+  padding: 10px 14px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.92);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.loginForm input::placeholder {
+  color: rgba(148, 163, 184, 0.75);
+}
+
+.loginForm input:focus {
+  border-color: rgba(129, 140, 248, 0.95);
+  box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.8);
+  background: rgba(15, 23, 42, 1);
+}
+
+.loginForm .loginButton {
+  margin-top: 8px;
+}
+
+.loginToggle {
+  margin-top: 10px;
+  font-size: 12px;
+  color: rgba(148, 163, 184, 0.9);
+  text-align: center;
+}
+
+.linkButton {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  color: rgba(129, 140, 248, 1);
+  cursor: pointer;
+}
+
+.linkButton:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 920px) {
+  .loginShell {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+  }
+  .loginTitle {
+    font-size: 36px;
+  }
+  .loginHero {
+    padding-right: 0;
+    margin-bottom: 16px;
+  }
+}

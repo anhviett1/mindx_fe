@@ -1,0 +1,4 @@
+/* Keep this file minimal; global styles live in index.css */
+#root {
+  min-height: 100%;
+}
