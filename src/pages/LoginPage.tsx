@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import './LoginPage.css'
+import ReactGA from "react-ga4";
 
 const CLIENT_ID = import.meta.env.VITE_CLIENT_ID || ''
 const API_BASE_URL = import.meta.env.VITE_API_URL || '/api'
@@ -43,11 +44,11 @@ const LoginPage = () => {
       if (!data.authUrl) {
         throw new Error('No authorization URL returned from server')
       }
-
+      ReactGA.event({ category: "Auth", action: "login_openid_start" });
       // Redirect to OpenID authorization endpoint
       window.location.href = data.authUrl
     } catch (err: any) {
-      console.error('OpenID auth URL error:', err)
+      ReactGA.event({ category: "Auth", action: "login_openid_error", label: err.message });
       setError(err.message || 'Failed to initiate OpenID login')
     }
   }
@@ -75,10 +76,16 @@ const LoginPage = () => {
       const data = await response.json().catch(() => ({}))
 
       if (!response.ok) {
+        ReactGA.event({ 
+          category: "Auth", 
+          action: isRegisterMode ? "register_failed" : "login_failed",
+          label: data.message 
+        });
         throw new Error(data.message || `Failed to ${isRegisterMode ? 'register' : 'login'}`)
       }
 
       if (isRegisterMode) {
+        ReactGA.event({ category: "Auth", action: "register_success" });
         setError(null)
         alert('Registration successful. Please login.')
         setIsRegisterMode(false)
@@ -91,6 +98,8 @@ const LoginPage = () => {
       if (!data.token) {
         throw new Error('No token returned from server')
       }
+
+      ReactGA.event({ category: "Auth", action: "login_local_success" });
 
       login(data.token)
       navigate('/')
