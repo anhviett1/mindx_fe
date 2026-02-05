@@ -4,8 +4,8 @@ import { useAuth } from '../contexts/AuthContext'
 import './LoginPage.css'
 import ReactGA from "react-ga4";
 
-const CLIENT_ID = import.meta.env.VITE_CLIENT_ID || ''
-const API_BASE_URL = import.meta.env.VITE_API_URL || '/api'
+const CLIENT_ID = import.meta.env.VITE_CLIENT_ID
+const API_BASE_URL = import.meta.env.VITE_API_URL
 
 const LoginPage = () => {
   const { isAuthenticated, login } = useAuth()

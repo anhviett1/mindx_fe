@@ -3,39 +3,26 @@ import { useAuth } from '../contexts/AuthContext'
 import axios from 'axios'
 import './HomePage.css'
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || '/api'
+const API_BASE_URL = import.meta.env.VITE_API_URL
 
 const HomePage = () => {
   const { user, token } = useAuth()
   const [apiStatus, setApiStatus] = useState<string>('checking...')
-  const [testData, setTestData] = useState<any>(null)
   const [authApiData, setAuthApiData] = useState<any>(null)
 
   useEffect(() => {
     // Test API connection
     checkApiHealth()
-    fetchTestData()
     fetchAuthMe()
   }, [])
 
   const checkApiHealth = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL.replace('/api', '')}/health`)
+      const response = await axios.get(`${API_BASE_URL.replace('')}/health`)
       setApiStatus(`API is healthy - ${response.data.status}`)
     } catch (error) {
       setApiStatus('API connection failed')
       console.error('Health check error:', error)
-    }
-  }
-
-  const fetchTestData = async () => {
-    try {
-      const response = await axios.get(`${API_BASE_URL}/test`, {
-        headers: token ? { Authorization: `Bearer ${token}` } : {}
-      })
-      setTestData(response.data)
-    } catch (error) {
-      console.error('Test API error:', error)
     }
   }
 
@@ -65,7 +52,7 @@ const HomePage = () => {
           </p>
         </div>
         <div className="homeActions">
-          <button className="btn" onClick={() => { checkApiHealth(); fetchTestData(); }}>
+          <button className="btn" onClick={() => { checkApiHealth(); }}>
             Refresh
           </button>
         </div>
@@ -115,24 +102,11 @@ const HomePage = () => {
             </div>
             <div className="routes code">
               <div>GET /health</div>
-              <div>GET /api/test</div>
               <div>GET /api/auth/me (Bearer)</div>
             </div>
           </div>
         </section>
       </div>
-
-      {testData && (
-        <section className="panel homeWide">
-          <div className="panelHeader">
-            <div className="sectionTitle">Latest response</div>
-            <div className="sectionSub muted">GET /api/test</div>
-          </div>
-          <div className="panelBody">
-            <pre className="json">{JSON.stringify(testData, null, 2)}</pre>
-          </div>
-        </section>
-      )}
     </div>
   )
 }
