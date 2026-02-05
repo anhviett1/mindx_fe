@@ -32,7 +32,7 @@ const LoginPage = () => {
 
     try {
       setError(null)
-      const response = await fetch(`${API_BASE_URL}/auth/openid/url`)
+      const response = await fetch(`/api/auth/openid/url`)
       
       if (!response.ok) {
         const data = await response.json().catch(() => ({}))
