@@ -5,6 +5,11 @@ import App from './App'
 import './index.css'
 import ReactGA from "react-ga4";
 
+const MEASUREMENT_ID = import.meta.env.VITE_GA_ID; 
+if (MEASUREMENT_ID) {
+  ReactGA.initialize(MEASUREMENT_ID);
+}
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
@@ -12,6 +17,4 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     </BrowserRouter>
   </React.StrictMode>,
 )
-const MEASUREMENT_ID = import.meta.env.VITE_GA_ID; 
-ReactGA.initialize(MEASUREMENT_ID);
 
