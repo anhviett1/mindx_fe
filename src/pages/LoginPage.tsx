@@ -26,33 +26,32 @@ const LoginPage = () => {
 
   const handleContinueWithOpenId = async () => {
     if (!CLIENT_ID) {
-      setError('OpenID Client ID is not configured')
-      return
+      setError('OpenID Client ID is not configured');
+      return;
     }
 
     try {
-      setError(null)
-      const response = await fetch(`${API_BASE_URL}/auth/openid/url`)
+      setError(null);
+      const response = await fetch(`${API_BASE_URL}/auth/openid/url`);
       
       if (!response.ok) {
-        const data = await response.json().catch(() => ({}))
-        throw new Error(data.message || 'Failed to get authorization URL')
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.message || 'Failed to get authorization URL');
       }
 
-      const data = await response.json()
+      const data = await response.json();
       
       if (!data.authUrl) {
-        throw new Error('No authorization URL returned from server')
+        throw new Error('No authorization URL returned from server');
       }
-      ReactGA.event({ category: "Auth", action: "login_openid_start" });
-      // Redirect to OpenID authorization endpoint
-      window.location.href = data.authUrl
+      ReactGA?.event({ category: "Auth", action: "login_openid_start" });
+      
+      window.location.href = data.authUrl;
     } catch (err: any) {
-      ReactGA.event({ category: "Auth", action: "login_openid_error", label: err.message });
-      setError(err.message || 'Failed to initiate OpenID login')
+      ReactGA?.event({ category: "Auth", action: "login_openid_error", label: err.message });
+      setError(err.message || 'Failed to initiate OpenID login');
     }
   }
-
   const handleLocalSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoadingLocal(true)
