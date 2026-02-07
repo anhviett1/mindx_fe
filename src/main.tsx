@@ -7,7 +7,8 @@ import ReactGA from "react-ga4";
 
 const MEASUREMENT_ID = import.meta.env.VITE_GA_ID; 
 if (MEASUREMENT_ID) {
-  ReactGA.initialize(MEASUREMENT_ID);
+  const ga = (ReactGA as any).default || ReactGA;
+  ga.initialize(MEASUREMENT_ID);
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

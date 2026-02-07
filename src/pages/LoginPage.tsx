@@ -29,11 +29,12 @@ const LoginPage = () => {
       setError('OpenID Client ID is not configured');
       return;
     }
+    
+    const ga = (ReactGA as any).default || ReactGA;
 
     try {
       setError(null);
-      const response = await fetch(`${API_BASE_URL}/auth/openid/url`);
-      
+      const response = await fetch(`${API_BASE_URL}/auth/openid/url?t=${Date.now()}`);      
       if (!response.ok) {
         const data = await response.json().catch(() => ({}));
         throw new Error(data.message || 'Failed to get authorization URL');
@@ -44,11 +45,11 @@ const LoginPage = () => {
       if (!data.authUrl) {
         throw new Error('No authorization URL returned from server');
       }
-      ReactGA?.event({ category: "Auth", action: "login_openid_start" });
+      ga.event({ category: "Auth", action: "login_openid_start" });
       
       window.location.href = data.authUrl;
     } catch (err: any) {
-      ReactGA?.event({ category: "Auth", action: "login_openid_error", label: err.message });
+      ga.event({ category: "Auth", action: "login_openid_error", label: err.message });
       setError(err.message || 'Failed to initiate OpenID login');
     }
   }
