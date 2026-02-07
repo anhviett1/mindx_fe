@@ -34,8 +34,7 @@ const LoginPage = () => {
 
     try {
       setError(null);
-      const response = await fetch(`${API_BASE_URL}/auth/openid/url`);
-      
+      const response = await fetch(`${API_BASE_URL}/auth/openid/url?t=${Date.now()}`);      
       if (!response.ok) {
         const data = await response.json().catch(() => ({}));
         throw new Error(data.message || 'Failed to get authorization URL');
